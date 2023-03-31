@@ -85,7 +85,7 @@ namespace Practica01.Controllers
 
         [HttpPost]
         [Route("add")]
-        public IActionResult crear([FromBody] Carrera carreraNew)
+        public IActionResult crear([FromBody] carreras carreraNew)
         {
             try
             {
@@ -102,9 +102,9 @@ namespace Practica01.Controllers
 
         [HttpPut]
         [Route("actualizar/{id}")]
-        public IActionResult update(int id, [FromBody] Carrera modificar)
+        public IActionResult update(int id, [FromBody] carreras modificar)
         {
-            Carrera? carrera = (from e in _equiposContext.carreras
+            carreras? carrera = (from e in _equiposContext.carreras
                                where e.carrera_id == id
                                select e).FirstOrDefault();
 
@@ -125,7 +125,7 @@ namespace Practica01.Controllers
         [Route("Eliminar/{id}")]
         public IActionResult eliminar(int id)
         {
-            Carrera? carrera = (from e in _equiposContext.carreras
+            carreras? carrera = (from e in _equiposContext.carreras
                                where e.carrera_id == id
                                select e).FirstOrDefault();
             if (carrera == null) { return NotFound(); }

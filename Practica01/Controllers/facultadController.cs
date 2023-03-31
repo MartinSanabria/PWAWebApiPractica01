@@ -61,7 +61,7 @@ namespace Practica01.Controllers
 
         [HttpPost]
         [Route("add")]
-        public IActionResult post([FromBody] Facultad facuNew)
+        public IActionResult post([FromBody] facultades facuNew)
         {
             try
             {
@@ -79,9 +79,9 @@ namespace Practica01.Controllers
 
         [HttpPut]
         [Route("actualizar/{id}")]
-        public IActionResult update(int id, [FromBody] Facultad modificar)
+        public IActionResult update(int id, [FromBody] facultades modificar)
         {
-            Facultad? facultad = (from e in _equiposContext.facultades
+            facultades? facultad = (from e in _equiposContext.facultades
                              where e.facultad_id == id
                              select e).FirstOrDefault();
 
@@ -102,7 +102,7 @@ namespace Practica01.Controllers
         [Route("Eliminar/{id}")]
         public IActionResult eliminar(int id)
         {
-            Facultad? facultad = (from e in _equiposContext.facultades
+            facultades? facultad = (from e in _equiposContext.facultades
                              where e.facultad_id == id
                              select e).FirstOrDefault();
             if (facultad == null) { return NotFound(); }

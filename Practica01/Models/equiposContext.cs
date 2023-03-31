@@ -20,13 +20,13 @@ namespace Practica01.Models
 
         public DbSet<Estados_reserva> estados_reserva { get; set; }
 
-        public DbSet<Facultad> facultades { get; set; }
+        public DbSet<facultades> facultades { get; set; }
 
-        public DbSet<Carrera> carreras { get; set; }
+        public DbSet<carreras> carreras { get; set; }
 
-        public DbSet<Usuario> usuarios { get; set; }
+        public DbSet<usuarios> usuarios { get; set; }
 
-        public DbSet<Reserva> reservas { get; set; }
+        public DbSet<reservas> reservas { get; set; }
 
 
 

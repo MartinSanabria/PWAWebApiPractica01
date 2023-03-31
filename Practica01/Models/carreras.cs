@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Practica01.Models
 {
-    public class Carrera
+    public class carreras
     {
         [Key]
         public int carrera_id { get; set; }

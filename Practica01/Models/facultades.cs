@@ -2,7 +2,7 @@
 
 namespace Practica01.Models
 {
-    public class Facultad
+    public class facultades
     {
         [Key]
         public int facultad_id { get; set; }

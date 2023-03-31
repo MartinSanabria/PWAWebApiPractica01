@@ -124,7 +124,7 @@ namespace Practica01.Controllers
 
         [HttpPost]
         [Route("add")]
-        public IActionResult crear([FromBody] Reserva reserN)
+        public IActionResult crear([FromBody] reservas reserN)
         {
             try
             {
@@ -141,9 +141,9 @@ namespace Practica01.Controllers
 
         [HttpPut]
         [Route("actualizar/{id}")]
-        public IActionResult actualizarEquipo(int id, [FromBody] Reserva modificar)
+        public IActionResult actualizarEquipo(int id, [FromBody] reservas modificar)
         {
-            Reserva? reser = (from e in _equiposContext.reservas
+            reservas? reser = (from e in _equiposContext.reservas
                                where e.reserva_id == id
                                select e).FirstOrDefault();
 
@@ -168,7 +168,7 @@ namespace Practica01.Controllers
         [Route("Eliminar/{id}")]
         public IActionResult eliminar(int id)
         {
-            Reserva? reser = (from e in _equiposContext.reservas
+            reservas? reser = (from e in _equiposContext.reservas
                                where e.reserva_id == id
                                select e).FirstOrDefault();
             if (reser == null) { return NotFound(); }

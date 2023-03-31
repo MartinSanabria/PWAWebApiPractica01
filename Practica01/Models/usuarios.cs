@@ -2,7 +2,7 @@
 
 namespace Practica01.Models
 {
-    public class Usuario
+    public class usuarios
     {
         [Key]
         public int usuario_id { get; set; }

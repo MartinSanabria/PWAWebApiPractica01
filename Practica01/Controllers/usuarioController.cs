@@ -90,7 +90,7 @@ namespace Practica01.Controllers
 
         [HttpPost]
         [Route("add")]
-        public IActionResult add([FromBody] Usuario userN)
+        public IActionResult add([FromBody] usuarios userN)
         {
             try
             {
@@ -107,9 +107,9 @@ namespace Practica01.Controllers
 
         [HttpPut]
         [Route("actualizar/{id}")]
-        public IActionResult actualizarEquipo(int id, [FromBody] Usuario modificar)
+        public IActionResult actualizarEquipo(int id, [FromBody] usuarios modificar)
         {
-            Usuario? user = (from e in _equiposContext.usuarios
+            usuarios? user = (from e in _equiposContext.usuarios
                                where e.usuario_id == id
                                select e).FirstOrDefault();
 
@@ -133,7 +133,7 @@ namespace Practica01.Controllers
         [Route("Eliminar/{id}")]
         public IActionResult eliminar(int id)
         {
-            Usuario? user = (from e in _equiposContext.usuarios
+            usuarios? user = (from e in _equiposContext.usuarios
                                where e.usuario_id == id
                                select e).FirstOrDefault();
             if (user == null) { return NotFound(); }
