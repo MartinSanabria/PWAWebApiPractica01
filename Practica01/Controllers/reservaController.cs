@@ -5,6 +5,8 @@ using System.Resources;
 
 namespace Practica01.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class reservaController : ControllerBase
     {
         private readonly equiposContext _equiposContext;

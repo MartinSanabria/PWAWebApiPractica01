@@ -7,15 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 //TODO: connection width sql server
 
-builder.Services.AddDbContext<equiposContext>(
-    option => option.UseSqlServer(
-            builder.Configuration.GetConnectionString("equiposDbConnection")
-        )) ;
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<equiposContext>(
+    option => option.UseSqlServer(
+            builder.Configuration.GetConnectionString("equiposDbConnection")
+        ));
 
 var app = builder.Build();
 

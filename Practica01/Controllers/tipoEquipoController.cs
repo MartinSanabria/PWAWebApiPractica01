@@ -4,6 +4,8 @@ using Practica01.Models;
 
 namespace Practica01.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class tipoEquipoController : ControllerBase
     {
         private readonly equiposContext _equiposContext;
