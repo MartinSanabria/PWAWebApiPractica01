@@ -56,27 +56,9 @@ namespace Practica01.Controllers
         [Route("getbyid/{id}")]
         public IActionResult get(int id)
         {
-            var equipo = (from db in _equiposContext.equipos
-                               join t in _equiposContext.tipo_equipo
-                                    on db.tipo_equipo_id equals t.id_tipo_equipo
-                               join m in _equiposContext.marcas
-                                    on db.marca_id equals m.id_marcas
-                               join es in _equiposContext.estados_equipo
-                                    on db.estado_equipo_id equals es.id_estados_equipo
-                               where db.id_equipos == id 
-                          select new
-                          {
-                              db.id_equipos,
-                              db.nombre,
-                              db.descripcion,
-                              db.tipo_equipo_id,
-                              tipo_equipo = t.descripcion,
-                              db.marca_id,
-                              marca = m.nombre_marca,
-                              db.estado_equipo_id,
-                              estado_equipo = es.descripcion,
-                              db.estado
-                          }).FirstOrDefault();
+            equipos? equipo = (from e in _equiposContext.equipos 
+                          where e.id_equipos == id 
+                          select e).FirstOrDefault();
             if (equipo == null)
             {
                 return NotFound();
@@ -93,27 +75,9 @@ namespace Practica01.Controllers
         [Route("find")]
         public IActionResult buscar(string filtro)
         {
-            var equiposList = (from db in _equiposContext.equipos
-                                         join t in _equiposContext.tipo_equipo
-                                              on db.tipo_equipo_id equals t.id_tipo_equipo
-                                         join m in _equiposContext.marcas
-                                              on db.marca_id equals m.id_marcas
-                                         join es in _equiposContext.estados_equipo
-                                              on db.estado_equipo_id equals es.id_estados_equipo
-                                         where db.nombre.Contains(filtro) || db.descripcion.Contains(filtro)
-                                         select new
-                                         {
-                                             db.id_equipos,
-                                             db.nombre,
-                                             db.descripcion,
-                                             db.tipo_equipo_id,
-                                             tipo_equipo = t.descripcion,
-                                             db.marca_id,
-                                             marca = m.nombre_marca,
-                                             db.estado_equipo_id,
-                                             estado_equipo = es.descripcion,
-                                             db.estado
-                                         }).ToList();
+            List<equipos> equiposList = (from e in _equiposContext.equipos
+                                         where e.nombre.Contains(filtro) || e.descripcion.Contains(filtro)
+                                         select e).ToList();
 
             if (equiposList.Any())
             {
@@ -135,7 +99,7 @@ namespace Practica01.Controllers
             try
             {
                 equiposNew.estado = "A";
-                _equiposContext.equipos.Add(equiposNew);
+                _equiposContext.Add(equiposNew);
                 _equiposContext.SaveChanges();
                 return Ok(equiposNew);
 
@@ -167,7 +131,7 @@ namespace Practica01.Controllers
             equipo.nombre = modificar.nombre;
             equipo.descripcion = modificar.descripcion;
 
-            _equiposContext.equipos.Entry(equipo).State = EntityState.Modified;
+            _equiposContext.Entry(equipo).State = EntityState.Modified;
             _equiposContext.SaveChanges();
             return Ok(equipo);
 
@@ -187,7 +151,7 @@ namespace Practica01.Controllers
                                select e).FirstOrDefault();
             if(equipo == null) { return NotFound(); }
             equipo.estado = "I";
-            _equiposContext.equipos.Entry(equipo).State = EntityState.Modified;   
+            _equiposContext.Entry(equipo).State = EntityState.Modified;   
             //_equiposContext.Attach(equipo);
             //_equiposContext.Remove(equipo);
             _equiposContext.SaveChanges();
