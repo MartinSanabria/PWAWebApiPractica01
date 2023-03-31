@@ -20,8 +20,26 @@ namespace Practica01.Controllers
         [Route("getall")]
         public IActionResult ObtenerEquipos()
         {
-            List<equipos> listadoEquipo = (from db in _equiposContext.equipos
-                                           select db).ToList();
+            var listadoEquipo = (from db in _equiposContext.equipos
+                                           join t in _equiposContext.tipo_equipo 
+                                                on db.tipo_equipo_id equals t.id_tipo_equipo
+                                           join m in _equiposContext.marcas 
+                                                on db.marca_id equals m.id_marcas
+                                           join es in _equiposContext.estados_equipo
+                                                on db.estado_equipo_id equals es.id_estados_equipo
+                                                select new
+                                                {
+                                                    db.id_equipos,
+                                                    db.nombre,
+                                                    db.descripcion,
+                                                    db.tipo_equipo_id,
+                                                    tipo_equipo = t.descripcion,
+                                                    db.marca_id,
+                                                    marca = m.nombre_marca,
+                                                    db.estado_equipo_id,
+                                                    estado_equipo = es.descripcion,
+                                                    db.estado
+                                                    }).ToList();
 
             if (listadoEquipo.Count == 0) { return NotFound(); }
 
